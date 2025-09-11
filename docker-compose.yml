@@ -16,6 +16,14 @@ services:
         interval: 10s
         timeout: 5s
         retries: 5
+      
+    migrate:
+        image: migrate/migrate:4
+        volumes:
+          - ./migrations:/migrations
+        entrypoint: ["migrate", "-path=/migrations", "-database=postgres://postgres:postgres@db:5432/imgfetchr?sslmode=disable"]
+        depends_on:
+          - db
 
 volumes:
   db_data:
