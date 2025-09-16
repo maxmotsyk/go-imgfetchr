@@ -1,4 +1,3 @@
-version: "3.9"
 services:
     db:
       image: postgres:16 
@@ -24,6 +23,8 @@ services:
         entrypoint: ["migrate", "-path=/migrations", "-database=postgres://postgres:postgres@db:5432/imgfetchr?sslmode=disable"]
         depends_on:
           - db
+        ports:
+        - "5432:5432"
 
 volumes:
   db_data:
